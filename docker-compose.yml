@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - websocket
+
+  websocket:
+    image: node:14
+    command: ["node", "server.js"]
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
